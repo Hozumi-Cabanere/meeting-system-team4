@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui@2.15.1/lib/index.js"></script>
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <title>论文管理系统</title>
+    <title>普通用户信息推送</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -66,7 +66,7 @@
             </el-row>
             
             
-            <el-table ref="filterTable" :data="tableData" style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
+            <el-table ref="filterTable" :data="tableData.slice((currPage-1)*limitCount,currPage*limitCount)" style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
                 <el-table-column prop="context" label="内容" :formatter="formatter">
                 </el-table-column>
                 <el-table-column prop="name" label="发布人" width="180">
@@ -86,7 +86,15 @@
                 </el-table-column>
             </el-table>
         </template>
-
+        <el-pagination
+            @current-change="currentChange"
+            :current-page= "currPage"
+            layout = "prev, pager, next"
+            :total= "4"
+            style="text-align: center"
+            :page-size = "limitCount"
+            > 
+        </el-pagination>
 
     </div>
 </body>
@@ -96,29 +104,34 @@
         el: '#app',
 
         data() {
-
-            return {
-                tableData: [{
+            var data = [{
                     date: '2016-05-01',
                     name: '胡绪豪',
-                    context: '你好，操你一下',
+                    context: '你好，*你一下',
                    meeting : '会议1'
                 }, {
                     date: '2016-05-03',
-                    name: '庄志英',
+                    name: '庄**',
                     context: '你被退学了',
-                   meeting : '会议2'
+                    meeting : '会议2'
                 }, {
                     date: '2016-05-02',
                     name: '林子坤',
                     context: '不错',
-                   meeting : '会议1'
+                    meeting : '会议1'
                 }, {
                     date: '2016-05-04',
                     name: 'pc',
-                    context: '别划了',
-                   meeting : '会议2'
-                }]
+                    context: '',
+                    meeting : '会议2'
+                }];
+            var limitCount = 8;
+            var pageCount =data.count/limitCount;
+            return {
+                tableData: data,
+                limitCount:limitCount,
+                currPage : 1,
+                pageCount: pageCount,
             };
         },
         watch: {
@@ -140,6 +153,10 @@
             filterHandler(value, row, column) {
                 const property = column['property'];
                 return row[property] === value;
+            },
+            currentChange(val){
+                console.log(val);
+                this.currPage = val;
             }
         },
 
