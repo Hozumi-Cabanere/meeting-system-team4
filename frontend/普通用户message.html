@@ -1,0 +1,147 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui@2.15.1/lib/index.js"></script>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>论文管理系统</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default mz-navbar">
+        <div class="container">
+            <!-- 这个navbar-header是给内部两个元素包了一层通栏盒子，自身是清除浮动的作用,控制的是导航垂直布局 -->
+            <div class="navbar-header">
+                <!-- 右边按钮 -->
+                <!-- navbar-toggle控制按钮只在移动端显示。data-toggle是js功能标志，js会找到这个元素注册点击事件 -->
+                <button type="button" class="navbar-toggle" data-toggle='collapse' data-target='.navbar-collapse'>
+                    <div class="icon-bar"></div>
+                    <div class="icon-bar"></div>
+                    <div class="icon-bar"></div>
+                </button>
+                <!-- 左边logo -->
+                <a class="navbar-brand " href="./">Maizi Admin</a>
+            </div>
+            <!-- 需要折叠的内容,collaspe表示折叠默认隐藏，配合navbar-collapse宽频默认显示、移动端隐藏 -->
+            <div class="navbar-collapse collapse">
+                <!-- navbar-nav控制移动端时li为block,nav控制li为float -->
+                <!-- nav类本质是让ul下的li左浮动水平排列，并设置ul和li的样式,也就是基本的导航样式 -->
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html"><span
+                                class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;后台首页</a></li>
+                    <li><a href="user_list.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+                    <li><a href="content.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;内容管理</a>
+                    </li>
+                    <li><a href="tag.html"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;标签管理</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" type="button" href="javascript:void(0);" data-toggle="dropdown">
+                            admin
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;前台首页</a></li>
+                            <li><a href="../"><span class="glyphicon glyphicon-user"></span>&nbsp;用户主页</a></li>
+                            <li><a href="../"><span class="glyphicon glyphicon-cog"></span>&nbsp;个人设置</a></li>
+                            <li><a href="../"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;账户中心</a></li>
+                            <li><a href="../"><span class="glyphicon glyphicon-heart"></span>&nbsp;我的收藏</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="app" style="margin: 0 10%;">
+        <template>
+            <el-button @click="resetDateFilter">清除日期过滤器</el-button>
+            <el-button @click="clearFilter">清除所有过滤器</el-button>
+            <el-table ref="filterTable" :data="tableData" style="width: 100%">
+                <el-table-column prop="context" label="内容" :formatter="formatter">
+                </el-table-column>
+                <el-table-column prop="name" label="发布人" width="180">
+                </el-table-column>
+                
+                <el-table-column prop="date" label="日期" sortable width="180" column-key="date"
+                    :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
+                    :filter-method="filterHandler">
+                </el-table-column>
+                <el-table-column prop="meeting" label="会议" width="100"
+                    :filters="[{ text: '会议1', value: '会议1' }, { text: '会议2', value: '会议2' }]" :filter-method="filtermeeting"
+                    filter-placement="bottom-end">
+                    <template slot-scope="scope">
+                        <el-tag :type="scope.row.meeting === '会议1' ? 'primary' : 'success'" disable-transitions>
+                            {{scope.row.meeting}}</el-tag>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </template>
+
+
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+
+        data() {
+
+            return {
+                tableData: [{
+                    date: '2016-05-01',
+                    name: '胡绪豪',
+                    context: '你好，操你一下',
+                   meeting : '会议1'
+                }, {
+                    date: '2016-05-03',
+                    name: '庄志英',
+                    context: '你被退学了',
+                   meeting : '会议2'
+                }, {
+                    date: '2016-05-02',
+                    name: '林子坤',
+                    context: '不错',
+                   meeting : '会议1'
+                }, {
+                    date: '2016-05-04',
+                    name: 'pc',
+                    context: '别划了',
+                   meeting : '会议2'
+                }]
+            };
+        },
+        watch: {
+
+        },
+        methods: {
+            resetDateFilter() {
+                this.$refs.filterTable.clearFilter('date');
+            },
+            clearFilter() {
+                this.$refs.filterTable.clearFilter();
+            },
+            formatter(row, column) {
+                return row.context;
+            },
+            filtermeeting(value, row) {
+                return row.meeting === value;
+            },
+            filterHandler(value, row, column) {
+                const property = column['property'];
+                return row[property] === value;
+            }
+        },
+
+    })
+
+</script>
+
+</html>
