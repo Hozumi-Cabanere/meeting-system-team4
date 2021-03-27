@@ -19,40 +19,42 @@
             <div class="navbar-header">
                 <!-- 右边按钮 -->
                 <!-- navbar-toggle控制按钮只在移动端显示。data-toggle是js功能标志，js会找到这个元素注册点击事件 -->
-                <!-- <button type="button" class="navbar-toggle" data-toggle='collapse' data-target='.navbar-collapse'>
+                <button type="button" class="navbar-toggle" data-toggle='collapse' data-target='.navbar-collapse'>
                     <div class="icon-bar"></div>
                     <div class="icon-bar"></div>
                     <div class="icon-bar"></div>
-                </button> -->
+                </button>
                 <!-- 左边logo -->
-                <a class="navbar-brand " href="./main.html">会议网站(首页)</a>
+                <a class="navbar-brand " href="./">Maizi Admin</a>
             </div>
             <!-- 需要折叠的内容,collaspe表示折叠默认隐藏，配合navbar-collapse宽频默认显示、移动端隐藏 -->
             <div class="navbar-collapse collapse">
                 <!-- navbar-nav控制移动端时li为block,nav控制li为float -->
                 <!-- nav类本质是让ul下的li左浮动水平排列，并设置ul和li的样式,也就是基本的导航样式 -->
-                <!-- <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;后台首页</a></li>
-            <li><a href="user_list.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
-            <li><a href="content.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;内容管理</a></li>
-            <li><a href="tag.html"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;标签管理</a></li>
-          </ul> -->
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html"><span
+                                class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;后台首页</a></li>
+                    <li><a href="user_list.html"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+                    <li><a href="content.html"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;内容管理</a>
+                    </li>
+                    <li><a href="tag.html"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;标签管理</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- <li class="dropdown">
-                <a class="dropdown-toggle" type="button" href="javascript:void(0);" data-toggle="dropdown" >
-                        admin
-                        <span class="caret"></span>
-                      </a>
-                <ul class="dropdown-menu">
-                      <li><a href="../"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;前台首页</a></li>
-                      <li><a href="../"><span class="glyphicon glyphicon-user"></span>&nbsp;用户主页</a></li>
-                      <li><a href="../"><span class="glyphicon glyphicon-cog"></span>&nbsp;个人设置</a></li>
-                      <li><a href="../"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;账户中心</a></li>
-                      <li><a href="../"><span class="glyphicon glyphicon-heart"></span>&nbsp;我的收藏</a></li>
-                    </ul>
-              </li> -->
-                    <li><a href=""><span class="glyphicon glyphicon-login"></span>&nbsp;&nbsp;登录</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-account"></span>&nbsp;&nbsp;注册</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" type="button" href="javascript:void(0);" data-toggle="dropdown">
+                            admin
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;前台首页</a></li>
+                            <li><a href="../"><span class="glyphicon glyphicon-user"></span>&nbsp;用户主页</a></li>
+                            <li><a href="../"><span class="glyphicon glyphicon-cog"></span>&nbsp;个人设置</a></li>
+                            <li><a href="../"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;账户中心</a></li>
+                            <li><a href="../"><span class="glyphicon glyphicon-heart"></span>&nbsp;我的收藏</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
+                    </li>
                 </ul>
             </div>
         </div>
